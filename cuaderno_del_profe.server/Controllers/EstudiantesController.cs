@@ -48,20 +48,25 @@ namespace cuaderno_del_profe.server.Controllers
                 return BadRequest();
             }
 
+            if (HayDuplicidades(model)) return new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar");
+
             try
             {
                 repo.Edit(model);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!ModelExists(id))
                 {
                     return NotFound();
                 }
-                else
+
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
                 {
-                    throw;
+                    return new OperationResult(false, "Una o mas de las inscripciones no es valida");
                 }
+
+                throw ex;
             }
 
             return new OperationResult(true, "Éxito al editar");
@@ -71,12 +76,20 @@ namespace cuaderno_del_profe.server.Controllers
         public ActionResult<OperationResult> Post(EstudianteModel model)
         {
             Estudiante created;
+
+            if (HayDuplicidades(model)) return new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar");
+
             try
             {
                 created = repo.Add(model);
             }
             catch (Exception ex)
             {
+                if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
+                {
+                    return new OperationResult(false, "Una o mas de las inscripciones no es valida");
+                }
+
                 throw ex;
             }
 
@@ -104,7 +117,14 @@ namespace cuaderno_del_profe.server.Controllers
 
             return new OperationResult(true, "Éxito al eliminar");
         }
+        private bool HayDuplicidades(EstudianteModel model)
+        {
+            if (model.Inscripciones == null || model.Inscripciones.Count == 0) return false;
 
+            var grouped = model.Inscripciones.GroupBy(x => $"{x.IdMateria} - {x.IdPeriodo}");
+
+            return grouped.Any(x => x.Count() > 1);
+        }
         private bool ModelExists(int id)
         {
             return repo.Any(e => e.IdEstudiante == id);

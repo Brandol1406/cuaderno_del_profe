@@ -40,6 +40,18 @@ namespace cuaderno_del_profe.server.Controllers
             return Calificacion;
         }
 
+        [HttpGet]
+        [Route("GetRelationObjects")]
+        public object GetRelationObjects()
+        {
+            var inscripcionRepo = new InscripcionRepo(_context);
+            return new { 
+                materias = _context.Materia,
+                periodos = _context.Periodo,
+                inscripciones = inscripcionRepo.Get()
+            };
+        }
+
         [HttpPut("{id}")]
         public ActionResult<OperationResult> Put(int id, [FromBody] CalificacionModel model)
         {
@@ -50,9 +62,15 @@ namespace cuaderno_del_profe.server.Controllers
 
             try
             {
+                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
+                if (!EstudianteExists(model.IdEstudiante)) return new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe");
+                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
+
+                if (!isCalificacionUnique(model)) return new OperationResult(false, "Ya se ha realizado esta calificación");
+
                 repo.Edit(model);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!ModelExists(id))
                 {
@@ -60,7 +78,7 @@ namespace cuaderno_del_profe.server.Controllers
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
 
@@ -73,6 +91,12 @@ namespace cuaderno_del_profe.server.Controllers
             Calificacion created;
             try
             {
+                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
+                if (!EstudianteExists(model.IdEstudiante)) return new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe");
+                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
+
+                if (!isCalificacionUnique(model)) return new OperationResult(false, "Ya se ha realizado esta calificación");
+
                 created = repo.Add(model);
             }
             catch (Exception ex)
@@ -80,7 +104,7 @@ namespace cuaderno_del_profe.server.Controllers
                 throw ex;
             }
 
-            return new OperationResult(true, "Éxito al crear", created);
+            return new OperationResult(true, "Éxito al crear");
         }
 
         [HttpDelete("{id}")]
@@ -104,10 +128,35 @@ namespace cuaderno_del_profe.server.Controllers
 
             return new OperationResult(true, "Éxito al eliminar");
         }
-
+        //Verifica si existe el modelo por su ID
         private bool ModelExists(int id)
         {
             return repo.Any(e => e.IdCalificacion == id);
+        }
+        private bool MateriaExists(int id)
+        {
+            return _context.Materia.Any(x => x.IdMateria == id);
+        }
+        private bool EstudianteExists(int id)
+        {
+            return _context.Estudiante.Any(x => x.IdEstudiante == id);
+        }
+        private bool PeriodoExists(int id)
+        {
+            return _context.Periodo.Any(x => x.IdPeriodo == id);
+        }
+        //Verifica si esta calificacion es unica para a este estudiante, en este periodo y en esta materia
+        private bool isCalificacionUnique(CalificacionModel model)
+        {
+            return !repo.Any(e => 
+                e.IdPeriodo == model.IdPeriodo
+                &&
+                e.IdMateria == model.IdMateria
+                &&
+                e.IdEstudiante == model.IdEstudiante
+                &&
+                e.IdCalificacion != model.IdCalificacion
+                );
         }
     }
 }

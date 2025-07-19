@@ -18,6 +18,9 @@ namespace cuaderno_del_profe.server.Repositories
                 Calificacion1 = m.Calificacion1,
             }), 
             (DB, filter) => from m in DB.Set<Calificacion>().Where(filter)
+                            join ma in DB.Set<Materia>() on m.IdMateria equals ma.IdMateria
+                            join e in DB.Set<Estudiante>() on m.IdEstudiante equals e.IdEstudiante
+                            join p in DB.Set<Periodo>() on m.IdPeriodo equals p.IdPeriodo
                             select new CalificacionModel()
                             {
                                 IdCalificacion = m.IdCalificacion,
@@ -27,6 +30,10 @@ namespace cuaderno_del_profe.server.Repositories
                                 IdMateria = m.IdMateria,
                                 IdPeriodo = m.IdPeriodo,
                                 Calificacion1 = m.Calificacion1,
+                                Estudiante = e.Nombres + " " + e.Apellidos,
+                                Matricula = e.Matricula,
+                                Materia = ma.Nombre,
+                                Periodo = p.Nombre,
                             }
         )
         {

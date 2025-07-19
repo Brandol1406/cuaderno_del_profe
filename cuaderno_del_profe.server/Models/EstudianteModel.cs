@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using cuaderno_del_profe.server.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -48,5 +49,6 @@ namespace cuaderno_del_profe.server.Models
         public string? Email { get; set; }
         [Column("FRegistro", TypeName = "datetime")]
         public DateTime? Fregistro { get; set; }
+        public List<InscripcionModel>? Inscripciones { get; set; }
     }
 }

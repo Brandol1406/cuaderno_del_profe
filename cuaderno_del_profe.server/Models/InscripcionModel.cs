@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace cuaderno_del_profe.server.Entities;
 
-public partial class Inscripcion
+public partial class InscripcionModel
 {
     [Key]
     [Column("idInscripcion")]
@@ -16,22 +16,14 @@ public partial class Inscripcion
 
     [Column("idEstudiante")]
     public int IdEstudiante { get; set; }
+    public string? Estudiante { get; set; }
+    public string? Matricula { get; set; }
 
     [Column("idMateria")]
     public int IdMateria { get; set; }
+    public string? Materia { get; set; }
 
     [Column("idPeriodo")]
     public int IdPeriodo { get; set; }
-
-    [ForeignKey("IdEstudiante")]
-    [InverseProperty("Inscripcion")]
-    public virtual Estudiante IdEstudianteNavigation { get; set; }
-
-    [ForeignKey("IdMateria")]
-    [InverseProperty("Inscripcion")]
-    public virtual Materia IdMateriaNavigation { get; set; }
-
-    [ForeignKey("IdPeriodo")]
-    [InverseProperty("Inscripcion")]
-    public virtual Periodo IdPeriodoNavigation { get; set; }
+    public string? Periodo { get; set; }
 }

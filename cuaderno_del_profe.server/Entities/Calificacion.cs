@@ -15,13 +15,13 @@ public partial class Calificacion
     public int IdCalificacion { get; set; }
 
     [Column("idEstudiante")]
-    public int? IdEstudiante { get; set; }
+    public int IdEstudiante { get; set; }
 
     [Column("idMateria")]
-    public int? IdMateria { get; set; }
+    public int IdMateria { get; set; }
 
     [Column("idPeriodo")]
-    public int? IdPeriodo { get; set; }
+    public int IdPeriodo { get; set; }
 
     [Column("Calificacion")]
     public int Calificacion1 { get; set; }

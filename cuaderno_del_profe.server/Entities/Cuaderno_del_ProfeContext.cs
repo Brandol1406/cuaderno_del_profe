@@ -31,31 +31,45 @@ public partial class Cuaderno_del_ProfeContext : DbContext
     {
         modelBuilder.Entity<Asistencia>(entity =>
         {
-            entity.HasKey(e => e.IdAsistencia).HasName("PK__Asistenc__4E1AB8948DA7CC07");
+            entity.HasKey(e => e.IdAsistencia).HasName("PK__Asistenc__4E1AB894E64BAB8D");
 
-            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Asistencia).HasConstraintName("FK__Asistenci__idMat__47DBAE45");
+            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Asistencia)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Asistenci__idMat__66603565");
 
-            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Asistencia).HasConstraintName("FK__Asistenci__idPer__48CFD27E");
+            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Asistencia)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Asistenci__idPer__6754599E");
         });
 
         modelBuilder.Entity<AsistenciaEstudiante>(entity =>
         {
-            entity.HasKey(e => e.IdAsistenciaEstudiante).HasName("PK__Asistenc__F47992EF9E055DBF");
+            entity.HasKey(e => e.IdAsistenciaEstudiante).HasName("PK__Asistenc__F47992EFFCDE53A1");
 
-            entity.HasOne(d => d.IdAsistenciaNavigation).WithMany(p => p.AsistenciaEstudiante).HasConstraintName("FK__Asistenci__idAsi__4BAC3F29");
+            entity.HasOne(d => d.IdAsistenciaNavigation).WithMany(p => p.AsistenciaEstudiante)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Asistenci__idAsi__6A30C649");
 
-            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.AsistenciaEstudiante).HasConstraintName("FK__Asistenci__idEst__4CA06362");
+            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.AsistenciaEstudiante)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Asistenci__idEst__6B24EA82");
         });
 
         modelBuilder.Entity<Calificacion>(entity =>
         {
-            entity.HasKey(e => e.IdCalificacion).HasName("PK__Califica__E056358F2ADF9C70");
+            entity.HasKey(e => e.IdCalificacion).HasName("PK__Califica__E056358F0473C0DA");
 
-            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.Calificacion).HasConstraintName("FK__Calificac__idEst__4316F928");
+            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.Calificacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Calificac__idEst__619B8048");
 
-            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Calificacion).HasConstraintName("FK__Calificac__idMat__440B1D61");
+            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Calificacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Calificac__idMat__628FA481");
 
-            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Calificacion).HasConstraintName("FK__Calificac__idPer__44FF419A");
+            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Calificacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Calificac__idPer__6383C8BA");
         });
 
         modelBuilder.Entity<Estudiante>(entity =>
@@ -67,13 +81,19 @@ public partial class Cuaderno_del_ProfeContext : DbContext
 
         modelBuilder.Entity<Inscripcion>(entity =>
         {
-            entity.HasKey(e => e.IdInscripcion).HasName("PK__Inscripc__3D58AB69D72C6D8D");
+            entity.HasKey(e => e.IdInscripcion).HasName("PK__Inscripc__3D58AB69F16E8F7B");
 
-            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.Inscripcion).HasConstraintName("FK__Inscripci__idEst__3E52440B");
+            entity.HasOne(d => d.IdEstudianteNavigation).WithMany(p => p.Inscripcion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Inscripci__idEst__5CD6CB2B");
 
-            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Inscripcion).HasConstraintName("FK__Inscripci__idMat__3F466844");
+            entity.HasOne(d => d.IdMateriaNavigation).WithMany(p => p.Inscripcion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Inscripci__idMat__5DCAEF64");
 
-            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Inscripcion).HasConstraintName("FK__Inscripci__idPer__403A8C7D");
+            entity.HasOne(d => d.IdPeriodoNavigation).WithMany(p => p.Inscripcion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Inscripci__idPer__5EBF139D");
         });
 
         modelBuilder.Entity<Materia>(entity =>

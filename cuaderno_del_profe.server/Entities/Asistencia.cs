@@ -15,10 +15,10 @@ public partial class Asistencia
     public int IdAsistencia { get; set; }
 
     [Column("idMateria")]
-    public int? IdMateria { get; set; }
+    public int IdMateria { get; set; }
 
     [Column("idPeriodo")]
-    public int? IdPeriodo { get; set; }
+    public int IdPeriodo { get; set; }
 
     public DateOnly Fecha { get; set; }
 

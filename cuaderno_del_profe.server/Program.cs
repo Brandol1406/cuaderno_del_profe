@@ -43,7 +43,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        //Los endpoints vienen collapsados por defecto (eso mejora la navegacion en la UI)
+        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None); 
+    });
 }
 
 app.UseHttpsRedirection();

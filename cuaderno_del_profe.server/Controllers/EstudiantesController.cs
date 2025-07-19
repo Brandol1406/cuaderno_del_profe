@@ -73,7 +73,6 @@ namespace cuaderno_del_profe.server.Controllers
             Estudiante created;
             try
             {
-                model.Fregistro = DateTime.Now;
                 created = repo.Add(model);
             }
             catch (Exception ex)
@@ -81,7 +80,7 @@ namespace cuaderno_del_profe.server.Controllers
                 throw ex;
             }
 
-            return new OperationResult(true, "Éxito al crear", created);
+            return new OperationResult(true, "Éxito al crear");
         }
 
         [HttpDelete("{id}")]

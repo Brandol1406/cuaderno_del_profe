@@ -10,14 +10,17 @@ namespace cuaderno_del_profe.server.Models
         public int IdCalificacion { get; set; }
 
         [Column("idEstudiante")]
-        public int? IdEstudiante { get; set; }
+        public int IdEstudiante { get; set; }
+        public string? Estudiante { get; set; }
+        public string? Matricula { get; set; }
 
         [Column("idMateria")]
-        public int? IdMateria { get; set; }
+        public int IdMateria { get; set; }
+        public string? Materia { get; set; }
 
         [Column("idPeriodo")]
-        public int? IdPeriodo { get; set; }
-
+        public int IdPeriodo { get; set; }
+        public string? Periodo { get; set; }
         [Column("Calificacion")]
         public int Calificacion1 { get; set; }
 

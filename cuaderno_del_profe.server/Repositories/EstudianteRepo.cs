@@ -6,6 +6,7 @@ namespace cuaderno_del_profe.server.Repositories
 {
     public class EstudianteRepo : Repository<Estudiante, EstudianteModel>
     {
+        public InscripcionRepo InscripcionRepo { get; set; }
         public EstudianteRepo(DbContext dbContext) : base(
             dbContext, 
             new ObjectsMapper<EstudianteModel, Estudiante>(m => new Estudiante() { 
@@ -38,20 +39,59 @@ namespace cuaderno_del_profe.server.Repositories
                             }
         )
         {
+            InscripcionRepo = new InscripcionRepo(dbContext);
+        }
+        public override EstudianteModel GetFirst(Func<Estudiante, bool> filter)
+        {
+            var found = base.GetFirst(filter);
 
+            if (found != null) found.Inscripciones = InscripcionRepo.Get(x => x.IdEstudiante == found.IdEstudiante).ToList();
+
+            return found;
         }
         public override Estudiante Add(EstudianteModel model)
         {
-            model.Matricula = ""; //El valor que tiene se limpia, para luego generarlo
-            model.Fregistro = DateTime.Now; //Fecha se registró
-            var created = base.Add(model);
-            created.Matricula = string.Concat(DateTime.Now.Year.ToString().Substring(2, 2), '-', created.IdEstudiante); //Se genera matricula (YY-#)
-            SaveChanges();
-            return created;
+            using (var trx = dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    model.Matricula = ""; //El valor que tiene se limpia, para luego generarlo
+                    model.Fregistro = DateTime.Now; //Fecha se registró
+                    var created = base.Add(model);
+                    created.Matricula = string.Concat(DateTime.Now.Year.ToString().Substring(2, 2), '-', created.IdEstudiante); //Se genera matricula (YY-#)
+                    SaveChanges();
+
+                    model.IdEstudiante = created.IdEstudiante;
+                    InscripcionRepo.SaveInscripciones(model);
+
+                    trx.Commit();
+                    return created;
+                }
+                      catch (Exception ex)
+                {
+                    trx.Rollback();
+                    throw ex;
+                }
+            }
         }
         public override void Edit(EstudianteModel model)
         {
-            base.Edit(model);
+            using (var trx = dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    base.Edit(model);
+
+                    InscripcionRepo.SaveInscripciones(model);
+
+                    trx.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trx.Rollback();
+                    throw ex;
+                }
+            }
         }
     }
 }

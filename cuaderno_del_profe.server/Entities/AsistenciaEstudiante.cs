@@ -15,10 +15,10 @@ public partial class AsistenciaEstudiante
     public int IdAsistenciaEstudiante { get; set; }
 
     [Column("idAsistencia")]
-    public int? IdAsistencia { get; set; }
+    public int IdAsistencia { get; set; }
 
     [Column("idEstudiante")]
-    public int? IdEstudiante { get; set; }
+    public int IdEstudiante { get; set; }
 
     public bool Presente { get; set; }
 

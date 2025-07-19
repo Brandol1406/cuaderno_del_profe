@@ -1,0 +1,6 @@
+@cuaderno_del_profe_HostAddress = http://localhost:5070
+
+GET {{cuaderno_del_profe_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

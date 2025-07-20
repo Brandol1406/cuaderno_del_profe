@@ -27,6 +27,12 @@ public partial class Cuaderno_del_ProfeContext : DbContext
 
     public virtual DbSet<Periodo> Periodo { get; set; }
 
+    public virtual DbSet<Roles> Roles { get; set; }
+
+    public virtual DbSet<UsuarioRoles> UsuarioRoles { get; set; }
+
+    public virtual DbSet<Usuarios> Usuarios { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Asistencia>(entity =>
@@ -104,6 +110,25 @@ public partial class Cuaderno_del_ProfeContext : DbContext
         modelBuilder.Entity<Periodo>(entity =>
         {
             entity.HasKey(e => e.IdPeriodo).HasName("PK__Periodo__90A7D3D86E33660C");
+        });
+
+        modelBuilder.Entity<Roles>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Roles__3214EC0745DFF850");
+        });
+
+        modelBuilder.Entity<UsuarioRoles>(entity =>
+        {
+            entity.HasKey(e => e.IdUsuarioRoles).HasName("PK__UsuarioR__01E371FACA48210A");
+
+            entity.HasOne(d => d.Rol).WithMany(p => p.UsuarioRoles).HasConstraintName("FK__UsuarioRo__RolId__7B5B524B");
+
+            entity.HasOne(d => d.Usuario).WithMany(p => p.UsuarioRoles).HasConstraintName("FK__UsuarioRo__Usuar__7A672E12");
+        });
+
+        modelBuilder.Entity<Usuarios>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Usuarios__3214EC07E7EE414E");
         });
 
         OnModelCreatingPartial(modelBuilder);

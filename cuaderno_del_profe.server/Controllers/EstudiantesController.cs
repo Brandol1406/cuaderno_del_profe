@@ -48,7 +48,7 @@ namespace cuaderno_del_profe.server.Controllers
                 return BadRequest();
             }
 
-            if (HayDuplicidades(model)) return new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar");
+            if (HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar"));
 
             try
             {
@@ -63,7 +63,7 @@ namespace cuaderno_del_profe.server.Controllers
 
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
                 {
-                    return new OperationResult(false, "Una o mas de las inscripciones no es valida");
+                    return BadRequest(new OperationResult(false, "Una o mas de las inscripciones no es valida"));
                 }
 
                 throw ex;
@@ -77,7 +77,7 @@ namespace cuaderno_del_profe.server.Controllers
         {
             Estudiante created;
 
-            if (HayDuplicidades(model)) return new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar");
+            if (HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.Inscripciones), "Existen duplicidades, favor revisar"));
 
             try
             {
@@ -87,7 +87,7 @@ namespace cuaderno_del_profe.server.Controllers
             {
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
                 {
-                    return new OperationResult(false, "Una o mas de las inscripciones no es valida");
+                    return BadRequest(new OperationResult(false, "Una o mas de las inscripciones no es valida"));
                 }
 
                 throw ex;

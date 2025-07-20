@@ -42,6 +42,18 @@
       {
          "Name": "[dbo].[Periodo]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Roles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UsuarioRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Usuarios]",
+         "ObjectType": 0
       }
    ],
    "UiHint": null,

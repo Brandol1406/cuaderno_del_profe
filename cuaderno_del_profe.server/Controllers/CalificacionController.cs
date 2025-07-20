@@ -1,6 +1,7 @@
 ﻿using cuaderno_del_profe.server.Entities;
 using cuaderno_del_profe.server.Models;
 using cuaderno_del_profe.server.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace cuaderno_del_profe.server.Controllers
             _context = context;
             repo = new CalificacionRepo(context);
         }
-
+        [Authorize]
         [HttpGet]
         public IEnumerable<CalificacionModel> Get()
         {
@@ -62,11 +63,11 @@ namespace cuaderno_del_profe.server.Controllers
 
             try
             {
-                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
-                if (!EstudianteExists(model.IdEstudiante)) return new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe");
-                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
+                if (!MateriaExists(model.IdMateria)) return BadRequest(new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe"));
+                if (!EstudianteExists(model.IdEstudiante)) return BadRequest(new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe"));
+                if (!PeriodoExists(model.IdPeriodo)) return BadRequest(new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe"));
 
-                if (!isCalificacionUnique(model)) return new OperationResult(false, "Ya se ha realizado esta calificación");
+                if (!isCalificacionUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado esta calificación"));
 
                 repo.Edit(model);
             }
@@ -82,7 +83,7 @@ namespace cuaderno_del_profe.server.Controllers
                 }
             }
 
-            return new OperationResult(true, "Éxito al editar");
+            return Ok(new OperationResult(true, "Éxito al editar"));
         }
 
         [HttpPost]
@@ -91,11 +92,11 @@ namespace cuaderno_del_profe.server.Controllers
             Calificacion created;
             try
             {
-                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
-                if (!EstudianteExists(model.IdEstudiante)) return new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe");
-                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
+                if (!MateriaExists(model.IdMateria)) return BadRequest(new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe"));
+                if (!EstudianteExists(model.IdEstudiante)) return BadRequest(new OperationResult(Field: nameof(model.IdEstudiante), $"El estudiante con el ID:{model.IdEstudiante} no existe"));
+                if (!PeriodoExists(model.IdPeriodo)) return BadRequest(new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe"));
 
-                if (!isCalificacionUnique(model)) return new OperationResult(false, "Ya se ha realizado esta calificación");
+                if (!isCalificacionUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado esta calificación"));
 
                 created = repo.Add(model);
             }

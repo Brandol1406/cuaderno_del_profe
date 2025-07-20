@@ -62,13 +62,13 @@ namespace cuaderno_del_profe.server.Controllers
 
             try
             {
-                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
-                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
-                if (!FechaDentroDePeriodo(model)) return new OperationResult(Field: nameof(model.Fecha), $"La fecha no está dentro del periodo seleccionado");
+                if (!MateriaExists(model.IdMateria)) return BadRequest(new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe"));
+                if (!PeriodoExists(model.IdPeriodo)) return BadRequest(new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe"));
+                if (!FechaDentroDePeriodo(model)) return BadRequest(new OperationResult(Field: nameof(model.Fecha), $"La fecha no está dentro del periodo seleccionado"));
 
-                if (!isAsistenciaUnique(model)) return new OperationResult(false, "Ya se ha realizado este registro de asistencia");
+                if (!isAsistenciaUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado este registro de asistencia"));
 
-                if (!HayDuplicidades(model)) return new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar");
+                if (!HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
 
                 repo.Edit(model);
             }
@@ -81,7 +81,7 @@ namespace cuaderno_del_profe.server.Controllers
 
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
                 {
-                    return new OperationResult(false, "Uno o mas de los estudiantes no es valido");
+                    return BadRequest(new OperationResult(false, "Uno o mas de los estudiantes no es valido"));
                 }
 
                 throw ex;
@@ -96,13 +96,13 @@ namespace cuaderno_del_profe.server.Controllers
             Asistencia created;
             try
             {
-                if (!MateriaExists(model.IdMateria)) return new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe");
-                if (!PeriodoExists(model.IdPeriodo)) return new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe");
-                if (!FechaDentroDePeriodo(model)) return new OperationResult(Field: nameof(model.Fecha), $"La fecha no está dentro del periodo seleccionado");
+                if (!MateriaExists(model.IdMateria)) return BadRequest(new OperationResult(Field: nameof(model.IdMateria), $"La materia con el ID:{model.IdMateria} no existe"));
+                if (!PeriodoExists(model.IdPeriodo)) return BadRequest(new OperationResult(Field: nameof(model.IdPeriodo), $"El periodo con en ID:{model.IdPeriodo} no existe"));
+                if (!FechaDentroDePeriodo(model)) return BadRequest(new OperationResult(Field: nameof(model.Fecha), $"La fecha no está dentro del periodo seleccionado"));
 
-                if (!isAsistenciaUnique(model)) return new OperationResult(false, "Ya se ha realizado este registro de asistencia");
+                if (!isAsistenciaUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado este registro de asistencia"));
 
-                if (HayDuplicidades(model)) return new OperationResult(Field: nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar");
+                if (!HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
 
                 created = repo.Add(model);
             }
@@ -110,7 +110,7 @@ namespace cuaderno_del_profe.server.Controllers
             {
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("FOREIGN KEY constraint"))
                 {
-                    return new OperationResult(false, "Uno o mas de los estudiantes no es valido");
+                    return BadRequest(new OperationResult(false, "Uno o mas de los estudiantes no es valido"));
                 }
 
                 throw ex;

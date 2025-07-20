@@ -1,0 +1,91 @@
+CREATE DATABASE Cuaderno_del_Profe
+GO
+
+USE Cuaderno_del_Profe
+GO
+
+CREATE TABLE Estudiante
+(
+	idEstudiante INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Matricula VARCHAR(20) NOT NULL UNIQUE,
+	Nombres VARCHAR(50) NOT NULL,
+	Apellidos VARCHAR(50) NOT NULL,
+	Sexo CHAR(1) NOT NULL,
+	FechaNacimiento DATE NULL,
+	Direccion VARCHAR(150) NULL,
+	Telefono1 VARCHAR(12) NULL,
+	Telefono2 VARCHAR(12) NULL,
+	Email VARCHAR(100) NULL,
+	FRegistro DATETIME NOT NULL
+)
+
+CREATE TABLE Materia
+(
+	idMateria INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
+	Nombre VARCHAR(50) NOT NULL,
+	Descripcion VARCHAR(250) NULL
+)
+
+CREATE TABLE Periodo
+(
+	idPeriodo INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	Nombre VARCHAR(50) NOT NULL,
+	FInicio DATE NOT NULL,
+	FFin DATE NOT NULL
+)
+
+CREATE TABLE Inscripcion
+(
+	idInscripcion INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	idEstudiante INT FOREIGN KEY REFERENCES Estudiante(idEstudiante) NOT NULL,
+	idMateria INT FOREIGN KEY REFERENCES Materia(idMateria) NOT NULL,
+	idPeriodo INT FOREIGN KEY REFERENCES Periodo(idPeriodo) NOT NULL
+)
+
+CREATE TABLE Calificacion
+(
+	idCalificacion INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	idEstudiante INT FOREIGN KEY REFERENCES Estudiante(idEstudiante) NOT NULL,
+	idMateria INT FOREIGN KEY REFERENCES Materia(idMateria) NOT NULL,
+	idPeriodo INT FOREIGN KEY REFERENCES Periodo(idPeriodo) NOT NULL,
+	Calificacion INT NOT NULL,
+	FRegistro DATETIME NOT NULL,
+	FEvaluacion DATETIME NOT NULL
+)
+
+CREATE TABLE Asistencia
+(
+	idAsistencia INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	idMateria INT FOREIGN KEY REFERENCES Materia(idMateria) NOT NULL,
+	idPeriodo INT FOREIGN KEY REFERENCES Periodo(idPeriodo) NOT NULL,
+	Fecha DATE NOT NULL
+)
+
+CREATE TABLE AsistenciaEstudiante
+(
+	idAsistenciaEstudiante INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	idAsistencia INT FOREIGN KEY REFERENCES Asistencia(idAsistencia) NOT NULL,
+	idEstudiante INT FOREIGN KEY REFERENCES Estudiante(idEstudiante) NOT NULL,
+	Presente BIT NOT NULL
+)
+
+CREATE TABLE Roles (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(50) NOT NULL UNIQUE
+)
+
+CREATE TABLE Usuarios (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    NombreUsuario NVARCHAR(50) NOT NULL UNIQUE,
+    Email NVARCHAR(100) NOT NULL UNIQUE,
+    ContrasenaHash NVARCHAR(255) NOT NULL
+)
+
+CREATE TABLE UsuarioRoles (
+	idUsuarioRoles INT IDENTITY(1,1) PRIMARY KEY NOT NULL, 
+    UsuarioId INT NOT NULL,
+    RolId INT NOT NULL,
+    FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id) ON DELETE CASCADE,
+    FOREIGN KEY (RolId) REFERENCES Roles(Id) ON DELETE CASCADE
+)
+

@@ -63,6 +63,31 @@ namespace cuaderno_del_profe.server.Controllers
             usuario.UsuarioRoles = null;
             return Ok(new OperationResult(true, "Éxito al iniciar sesión", usuario, tokenString));
         }
+        [HttpPost()]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] CambiarContrasenaModel request)
+        {
+            if (request.NuevaContrasena != request.ConfirmNuevaContrasena) return BadRequest(new OperationResult(Field: nameof(request.ConfirmNuevaContrasena), "Confirmacion nueva contraseña no coincide"));
+
+            // Obtener ID del usuario autenticado
+            var idUsuario = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+
+            var usuario = await _context.Usuarios.FindAsync(idUsuario);
+            if (usuario == null)
+                return Unauthorized(new OperationResult(false, "Usuario no encontrado o no está en línea"));
+
+            // Verificar contraseña actual
+            if (!BCrypt.Net.BCrypt.Verify(request.ContrasenaActual, usuario.ContrasenaHash))
+                return BadRequest(new OperationResult(Field: nameof(request.ContrasenaActual), "La contraseña actual es incorrecta"));
+
+            // Encriptar la nueva contraseña
+            var nuevaHash = BCrypt.Net.BCrypt.HashPassword(request.NuevaContrasena);
+
+            usuario.ContrasenaHash = nuevaHash;
+            await _context.SaveChangesAsync();
+
+            return Ok(new OperationResult(true, "Contraseña actualizada exitosamente."));
+        }
     }
 
 }

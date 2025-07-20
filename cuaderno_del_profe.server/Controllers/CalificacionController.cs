@@ -15,6 +15,7 @@ namespace cuaderno_del_profe.server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin,Professor")]
     public class CalificacionController : ControllerBase
     {
         private readonly Cuaderno_del_ProfeContext _context;
@@ -24,7 +25,6 @@ namespace cuaderno_del_profe.server.Controllers
             _context = context;
             repo = new CalificacionRepo(context);
         }
-        [Authorize]
         [HttpGet]
         public IEnumerable<CalificacionModel> Get()
         {

@@ -71,6 +71,18 @@ builder.Services.AddMvcCore().ConfigureApiBehaviorOptions(options =>
     };
 });
 
+builder.Services.AddScoped<IUserAccessor>(provider => {
+    IHttpContextAccessor context = provider.GetService<IHttpContextAccessor>();
+    int uid = Convert.ToInt32(context.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value);
+    string? username = Convert.ToString(context.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == "Name")?.Value);
+
+    return new UserAccessor
+    {
+        idUsuario = uid,
+        username = username
+    };
+});
+
 //Hace que se pueda requerir el token en Swagger
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>

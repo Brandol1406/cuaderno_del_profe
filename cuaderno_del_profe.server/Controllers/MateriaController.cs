@@ -1,6 +1,7 @@
 ﻿using cuaderno_del_profe.server.Entities;
 using cuaderno_del_profe.server.Models;
 using cuaderno_del_profe.server.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace cuaderno_del_profe.server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin,Professor")]
     public class MateriaController : ControllerBase
     {
         private readonly Cuaderno_del_ProfeContext _context;

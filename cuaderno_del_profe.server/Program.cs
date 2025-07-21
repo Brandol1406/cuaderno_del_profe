@@ -1,4 +1,5 @@
-﻿using cuaderno_del_profe.server.Entities;
+﻿using Azure.Core;
+using cuaderno_del_profe.server.Entities;
 using cuaderno_del_profe.server.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -127,7 +128,6 @@ app.MapControllers();
 
 app.UseDefaultFiles(); // Esto hace que / muestre index.html autom�ticamente
 app.UseStaticFiles();
-
 
 app.Run();
 

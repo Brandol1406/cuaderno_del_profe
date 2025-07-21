@@ -1,0 +1,8 @@
+<h2>{{ isEdit ? 'Editar' : 'Agregar' }} Item</h2>
+<form (ngSubmit)="onSubmit()">
+  <label>Nombre:</label><br />
+  <input [(ngModel)]="item.name" name="name" required /><br />
+  <label>Descripción:</label><br />
+  <textarea [(ngModel)]="item.description" name="description" required></textarea><br />
+  <button type="submit">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+</form>

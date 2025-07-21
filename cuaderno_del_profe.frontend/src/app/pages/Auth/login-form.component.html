@@ -1,0 +1,9 @@
+<h2>Login</h2>
+
+<form (ngSubmit)="onSubmit($event)">
+  <label>Nombre:</label><br />
+  <input type="text" [(ngModel)]="model.Usuario" name="Usuario" required /><br />
+  <label>Contraseña:</label><br />
+  <input type="password" [(ngModel)]="model.Contrasena" name="Contrasena" required /><br />
+  <button type="submit">Iniciar sesion</button>
+</form>

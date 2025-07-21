@@ -1,0 +1,11 @@
+<h2>Listado</h2>
+<a routerLink="/Items/new">Agregar nuevo</a>
+<ul>
+  <li *ngFor="let item of items">
+    <strong>{{ item.name }}</strong>: {{ item.description }}
+    <a [routerLink]="['/Items/edit', item.id]">Editar</a>
+    <button (click)="deleteItem(item.id)">Eliminar</button>
+  </li>
+</ul>
+
+<a routerLink="/">Volver al inicio</a>

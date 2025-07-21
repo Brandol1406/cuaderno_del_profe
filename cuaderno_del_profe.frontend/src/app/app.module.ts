@@ -11,6 +11,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemFormComponent } from './components/item-form/item-form.component';
 import { MateriasListComponent } from './pages/materias/materias-list.component';
 import { MateriasFormComponent } from './pages/materias/materias-form.component';
+import { PeriodosFormComponent } from './pages/periodos/periodos-form.component';
+import { PeriodosListComponent } from './pages/periodos/periodos-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { MateriasFormComponent } from './pages/materias/materias-form.component'
     ItemListComponent, 
     ItemFormComponent,
     MateriasListComponent,
-    MateriasFormComponent
+    MateriasFormComponent,
+    PeriodosListComponent,
+    PeriodosFormComponent
   ],
   imports: [
     BrowserModule, 

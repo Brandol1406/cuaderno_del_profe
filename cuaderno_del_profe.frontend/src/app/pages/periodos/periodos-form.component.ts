@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MateriaModel } from 'src/app/models/materia.model';
+import { PeriodoModel } from 'src/app/models/periodo.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-materias-form',
-  templateUrl: './materias-form.component.html'
+  selector: 'app-periodos-form',
+  templateUrl: './periodos-form.component.html'
 })
-export class MateriasFormComponent implements OnInit {
-  model: MateriaModel = { idMateria: 0, nombre: '', descripcion: '' };
+export class PeriodosFormComponent implements OnInit {
+  model: PeriodoModel = { idPeriodo: 0, nombre: '', finicio: new Date(), ffin: new Date() };
   isEdit = false;
   errors: object = {  };
-  private apiUrl = '/Materia';
+  private apiUrl = '/Periodo';
   private id = 0;
 
   constructor(
@@ -41,7 +41,7 @@ export class MateriasFormComponent implements OnInit {
         let result = await this.apiService.api.post(`${this.apiUrl}`, toSend);
       }
 
-      this.router.navigate(['/Materias/List']);
+      this.router.navigate(['/Periodos/List']);
     }
     catch (e) {
       

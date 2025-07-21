@@ -8,6 +8,9 @@ import { ItemFormComponent } from './components/item-form/item-form.component';
 //Materia
 import { MateriasListComponent } from './pages/materias/materias-list.component';
 import { MateriasFormComponent } from './pages/materias/materias-form.component';
+//Perido
+import { PeriodosListComponent } from './pages/periodos/periodos-list.component';
+import { PeriodosFormComponent } from './pages/periodos/periodos-form.component';
 
 const routes: Routes = [
   { path: '', component: InicioComponent },
@@ -16,10 +19,14 @@ const routes: Routes = [
   { path: 'Items/List', component: ItemListComponent },
   { path: 'Items/new', component: ItemFormComponent },
   { path: 'Items/edit/:id', component: ItemFormComponent },
-  //Materia
+  //Materias
   { path: 'Materias/List', component: MateriasListComponent },
   { path: 'Materias/new', component: MateriasFormComponent },
   { path: 'Materias/edit/:id', component: MateriasFormComponent },
+  //Peridos
+  { path: 'Periodos/List', component: PeriodosListComponent },
+  { path: 'Periodos/new', component: PeriodosFormComponent },
+  { path: 'Periodos/edit/:id', component: PeriodosFormComponent },
 
   { path: '**', redirectTo: '' }
 ];

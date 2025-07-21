@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { MateriaModel } from 'src/app/models/materia.model';
+import { PeriodoModel } from 'src/app/models/periodo.model';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
-  selector: 'app-materias-list',
-  templateUrl: './materias-list.component.html'
+  selector: 'app-periodos-list',
+  templateUrl: './periodos-list.component.html'
 })
-export class MateriasListComponent implements OnInit {
-  items: MateriaModel[] = [];
-  private apiUrl = '/Materia';
+export class PeriodosListComponent implements OnInit {
+  items: PeriodoModel[] = [];
+  private apiUrl = '/Periodo';
 
   constructor(private apiService: ApiService) {}
 

@@ -1,7 +1,10 @@
-<h2>Listado</h2>
-<a routerLink="/Materias/new">Agregar nuevo</a>
+<h2>Listado materias</h2>
+<a routerLink="/Materias/new"
+  class="btn btn-sm btn-primary mb-2"
+  >Agregar nueva
+</a>
 
-<table>
+<table class="table table-bordered table-sm table-striped">
   <colgroup>
     <col [width]="'10%'">
     <col [width]="'40%'">
@@ -22,8 +25,8 @@
       <td>{{item.nombre}}</td>
       <td>{{item.descripcion}}</td>
       <td>
-        <a [routerLink]="['/Materias/edit', item.idMateria]">Editar</a>
-        <button (click)="deleteItem(item.idMateria)">Eliminar</button>
+        <a [routerLink]="['/Materias/edit', item.idMateria]" class="btn btn-sm btn-primary">Editar</a>
+        <button (click)="deleteItem(item.idMateria)" class="btn btn-sm btn-danger">Eliminar</button>
       </td>
     </tr>
   </tbody>

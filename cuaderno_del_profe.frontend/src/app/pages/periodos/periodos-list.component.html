@@ -1,0 +1,38 @@
+<h2>Listado peridos</h2>
+<a routerLink="/Periodos/new"
+  class="btn btn-sm btn-primary mb-2"
+  >Agregar nuevo
+</a>
+
+<table class="table table-bordered table-sm table-striped">
+  <colgroup>
+    <col [width]="'10%'">
+    <col [width]="'30%'">
+    <col [width]="'25%'">
+    <col [width]="'25%'">
+    <col [width]="'10%'">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Inicio</th>
+      <th>Fin</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.idPeriodo}}</td>
+      <td>{{item.nombre}}</td>
+      <td>{{item.finicio}}</td>
+      <td>{{item.ffin}}</td>
+      <td>
+        <a [routerLink]="['/Periodos/edit', item.idPeriodo]" class="btn btn-sm btn-primary">Editar</a>
+        <button (click)="deleteItem(item.idPeriodo)" class="btn btn-sm btn-danger">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a routerLink="/">Volver al inicio</a>

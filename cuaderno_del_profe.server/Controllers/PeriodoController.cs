@@ -98,7 +98,7 @@ namespace cuaderno_del_profe.server.Controllers
             {
                 if (ex.InnerException != null && ex.InnerException.Message.Contains("REFERENCE constraint"))
                 {
-                    return new OperationResult(false, "No se puede eliminar porque tiene registros relacionados. Elimine todo con lo que este registro tiene relación primero");
+                    return BadRequest(new OperationResult(false, "No se puede eliminar porque tiene registros relacionados. Elimine todo con lo que este registro tiene relación primero"));
                 }
 
                 throw ex;

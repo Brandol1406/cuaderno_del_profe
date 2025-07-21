@@ -1,11 +1,20 @@
-<h2>{{ isEdit ? 'Editar' : 'Agregar' }} Item</h2>
+<h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
 <form (ngSubmit)="onSubmit($event)">
-  <label>Nombre:</label><br />
-  <input [(ngModel)]="model.nombre" name="Nombre" required /><br />
-  <small *ngIf="errors['Nombre']" class="p-error">{{
-              errors["Nombre"]
-            }}</small>
-  <label>Descripción:</label><br />
-  <textarea [(ngModel)]="model.descripcion" name="Descripcion" required></textarea><br />
-  <button type="submit">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+  <div class="row">
+    <div class="col-12 form-group">
+      <label>Nombre:</label><br />
+      <input [(ngModel)]="model.nombre" name="Nombre" class="form-control form-control-sm" required />
+      <small *ngIf="errors['Nombre']" class="text-danger">{{
+        errors["Nombre"]
+        }}</small>
+    </div>
+    <div class="col-12 form-group">
+      <label>Descripción:</label><br />
+      <textarea [(ngModel)]="model.descripcion" name="Descripcion" class="form-control form-control-sm" required></textarea><br />
+    </div>
+    <div class="col-12 form-group">
+      <button type="submit" class="btn btn-sm btn-primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+      <a routerLink="/Materias/List" class="btn btn-sm btn-secondary ml-2">Volver</a>
+    </div>
+  </div>
 </form>

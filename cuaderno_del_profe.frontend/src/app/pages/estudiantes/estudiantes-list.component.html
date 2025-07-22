@@ -1,0 +1,35 @@
+<h2>Listado peridos</h2>
+<a routerLink="/Estudiantes/new"
+  class="btn btn-sm btn-primary mb-2"
+  >Agregar nuevo
+</a>
+
+<table class="table table-bordered table-sm table-striped">
+  <colgroup>
+    <col [width]="'20%'">
+    <col [width]="'30%'">
+    <col [width]="'30%'">
+    <col [width]="'20%'">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>matrícula</th>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.matricula}}</td>
+      <td>{{item.nombres}}</td>
+      <td>{{item.apellidos}}</td>
+      <td>
+        <a [routerLink]="['/Estudiantes/edit', item.idEstudiante]" class="btn btn-sm btn-primary">Editar</a>
+        <button (click)="deleteItem(item.idEstudiante)" class="btn btn-sm btn-danger ms-2">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a routerLink="/">Volver al inicio</a>

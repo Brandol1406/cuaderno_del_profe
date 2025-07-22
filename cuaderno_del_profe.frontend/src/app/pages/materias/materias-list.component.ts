@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MateriaModel } from 'src/app/models/materia.model';
 import { ApiService } from 'src/app/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-materias-list',
@@ -10,7 +11,7 @@ export class MateriasListComponent implements OnInit {
   items: MateriaModel[] = [];
   private apiUrl = '/Materia';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.loadItems();
@@ -23,14 +24,27 @@ export class MateriasListComponent implements OnInit {
   }
 
   async deleteItem(id: number) {
-    try {
-      let result = await this.apiService.api.delete(`${this.apiUrl}/${id}`);
+    Swal.fire({
+      title: "¿Seguro desea eliminar este registro?",
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `
+      <i class="bi bi-trash"></i> Eliminar`,
+      confirmButtonColor: 'red',
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          let result = await this.apiService.api.delete(`${this.apiUrl}/${id}`);
 
-      this.loadItems();
-    }
-    catch (e) {
-      alert(e.response.data.message);
-      console.log(e);
-    }
+          this.loadItems();
+          Swal.fire("Eliminado!", "Se ha eliminado con éxito", "success");
+        }
+        catch (e) {
+          console.log(e);
+          Swal.fire("Aviso", e.response.data.message, "warning");
+        }
+      }
+    });
   }
 }

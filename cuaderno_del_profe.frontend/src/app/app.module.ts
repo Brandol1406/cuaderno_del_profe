@@ -15,6 +15,8 @@ import { MateriasListComponent } from './pages/materias/materias-list.component'
 import { MateriasFormComponent } from './pages/materias/materias-form.component';
 import { PeriodosFormComponent } from './pages/periodos/periodos-form.component';
 import { PeriodosListComponent } from './pages/periodos/periodos-list.component';
+import { EstudiantesListComponent } from './pages/estudiantes/estudiantes-list.component';
+import { EstudiantesFormComponent } from './pages/estudiantes/estudiantes-form.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { PeriodosListComponent } from './pages/periodos/periodos-list.component'
     MateriasListComponent,
     MateriasFormComponent,
     PeriodosListComponent,
-    PeriodosFormComponent
+    PeriodosFormComponent,
+    EstudiantesListComponent,
+    EstudiantesFormComponent,
   ],
   imports: [
     BrowserModule, 

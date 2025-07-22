@@ -1,0 +1,72 @@
+<h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
+<form (ngSubmit)="onSubmit($event)" #form="ngForm">
+  <div class="row">
+    <div class="col-12 form-group">
+      <label>Nombres:</label><br />
+      <input [(ngModel)]="model.nombres" name="Nombres" class="form-control form-control-sm" required />
+      <small *ngIf="errors['Nombres']" class="text-danger">{{
+        errors["Nombres"]
+        }}</small>
+    </div>
+    <div class="col-12 form-group">
+      <label>Apellidos:</label><br />
+      <input [(ngModel)]="model.apellidos" name="Apellidos" class="form-control form-control-sm" required />
+      <small *ngIf="errors['Apellidos']" class="text-danger">{{
+        errors["Apellidos"]
+        }}</small>
+    </div>
+    <div class="col-12 form-group">
+      <label>Sexo:</label><br />
+      <select [(ngModel)]="model.sexo" name="Sexo" class="form-control form-control-sm" required>
+        <option [ngValue]="null">Seleccione</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+      <small *ngIf="errors['Sexo']" class="text-danger">{{
+        errors["Sexo"]
+        }}</small>
+    </div>
+    <div class="col-12 form-group">
+      <label>Fecha Nacimiento:</label><br />
+      <input [(ngModel)]="model.fechaNacimiento" name="FechaNacimiento" type="date" class="form-control form-control-sm"
+         />
+      <small *ngIf="errors['FechaNacimiento']" class="text-danger">{{
+        errors["FechaNacimiento"]
+        }}</small>
+    </div>
+     <div class="col-12 form-group">
+      <label>Telefono1:</label><br />
+      <input [(ngModel)]="model.telefono1" name="Telefono1" class="form-control form-control-sm"  />
+      <small *ngIf="errors['Telefono1']" class="text-danger">{{
+        errors["Telefono1"]
+        }}</small>
+    </div>
+     <div class="col-12 form-group">
+      <label>Telefono1:</label><br />
+      <input [(ngModel)]="model.telefono2" name="Telefono2" class="form-control form-control-sm"  />
+      <small *ngIf="errors['Telefono2']" class="text-danger">{{
+        errors["Telefono2"]
+        }}</small>
+    </div>
+     <div class="col-12 form-group">
+      <label>Direccion:</label><br />
+      <textarea [(ngModel)]="model.direccion" name="Direccion" class="form-control form-control-sm" rows="3">
+      </textarea>
+      <small *ngIf="errors['Direccion']" class="text-danger">{{
+        errors["Direccion"]
+        }}</small>
+    </div>
+     <div class="col-12 form-group">
+      <label>E-Mail:</label><br />
+      <input [(ngModel)]="model.email" name="Email" class="form-control form-control-sm" />
+      <small *ngIf="errors['Email']" class="text-danger">{{
+        errors["Email"]
+        }}</small>
+    </div>
+    <div class="col-12 form-group mt-2">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid">{{ isEdit ? 'Actualizar' :
+        'Crear' }}</button>
+      <a routerLink="/Estudiantes/List" class="btn btn-sm btn-secondary ms-2">Volver</a>
+    </div>
+  </div>
+</form>

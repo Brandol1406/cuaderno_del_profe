@@ -6,14 +6,12 @@
 
 <table class="table table-bordered table-sm table-striped">
   <colgroup>
-    <col [width]="'10%'">
     <col [width]="'40%'">
     <col [width]="'40%'">
-    <col [width]="'10%'">
+    <col [width]="'20%'">
   </colgroup>
   <thead>
     <tr>
-      <th>#</th>
       <th>Nombre</th>
       <th>Descripcion</th>
       <th></th>
@@ -21,12 +19,11 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of items">
-      <td>{{item.idMateria}}</td>
       <td>{{item.nombre}}</td>
       <td>{{item.descripcion}}</td>
       <td>
         <a [routerLink]="['/Materias/edit', item.idMateria]" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i> Editar</a>
-        <button (click)="deleteItem(item.idMateria)" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Eliminar</button>
+        <button (click)="deleteItem(item.idMateria)" class="btn btn-sm btn-danger ms-2"><i class="bi bi-trash"></i> Eliminar</button>
       </td>
     </tr>
   </tbody>

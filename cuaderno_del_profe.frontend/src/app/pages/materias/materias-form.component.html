@@ -1,5 +1,5 @@
 <h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
-<form (ngSubmit)="onSubmit($event)">
+<form (ngSubmit)="onSubmit($event)" #form="ngForm">
   <div class="row">
     <div class="col-12 form-group">
       <label>Nombre:</label><br />
@@ -13,8 +13,8 @@
       <textarea [(ngModel)]="model.descripcion" name="Descripcion" class="form-control form-control-sm" required></textarea><br />
     </div>
     <div class="col-12 form-group">
-      <button type="submit" class="btn btn-sm btn-primary">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
-      <a routerLink="/Materias/List" class="btn btn-sm btn-secondary ml-2">Volver</a>
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+      <a routerLink="/Materias/List" class="btn btn-sm btn-secondary ms-2">Volver</a>
     </div>
   </div>
 </form>

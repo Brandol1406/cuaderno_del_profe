@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { PeriodoModel } from 'src/app/models/periodo.model';
+import { EstudianteModel } from 'src/app/models/estudiante.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-periodos-list',
-  templateUrl: './periodos-list.component.html'
+  selector: 'app-estudiantes-list',
+  templateUrl: './estudiantes-list.component.html'
 })
-export class PeriodosListComponent implements OnInit {
-  items: PeriodoModel[] = [];
-  private apiUrl = '/Periodo';
+export class EstudiantesListComponent implements OnInit {
+  items: EstudianteModel[] = [];
+  private apiUrl = '/Estudiantes';
 
   constructor(private apiService: ApiService) {}
 

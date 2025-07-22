@@ -1,18 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PeriodoModel } from 'src/app/models/periodo.model';
+import { EstudianteModel } from 'src/app/models/estudiante.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-periodos-form',
-  templateUrl: './periodos-form.component.html'
+  selector: 'app-estudiantes-form',
+  templateUrl: './estudiantes-form.component.html'
 })
-export class PeriodosFormComponent implements OnInit {
-  model: PeriodoModel = { idPeriodo: 0, nombre: '', finicio: null, ffin: null };
+export class EstudiantesFormComponent implements OnInit {
+  model: EstudianteModel = { 
+    idEstudiante: 0, 
+    nombres: null, 
+    apellidos: null, 
+    sexo: null,
+    direccion: null,
+    email: null,
+    fechaNacimiento: null,
+    fregistro: null,
+    telefono1: null,
+    telefono2: null,
+    inscripciones: null 
+  };
+  
   isEdit = false;
   errors: object = {  };
-  private apiUrl = '/Periodo';
+  private apiUrl = '/Estudiantes';
   private id = 0;
 
   constructor(
@@ -44,7 +57,7 @@ export class PeriodosFormComponent implements OnInit {
         result = await this.apiService.api.post(`${this.apiUrl}`, toSend);
       }
       Swal.fire("Guardado", result.data.message, "success");
-      this.router.navigate(['/Periodos/List']);
+      this.router.navigate(['/Estudiantes/List']);
     }
     catch (e) {
       this.errors = { ...e.response.data.errors};

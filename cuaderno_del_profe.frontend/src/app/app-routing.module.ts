@@ -13,6 +13,9 @@ import { MateriasFormComponent } from './pages/materias/materias-form.component'
 //Perido
 import { PeriodosListComponent } from './pages/periodos/periodos-list.component';
 import { PeriodosFormComponent } from './pages/periodos/periodos-form.component';
+//Estudiantes
+import { EstudiantesListComponent } from './pages/estudiantes/estudiantes-list.component';
+import { EstudiantesFormComponent } from './pages/estudiantes/estudiantes-form.component';
 
 const routes: Routes = [
   {
@@ -35,6 +38,10 @@ const routes: Routes = [
       { path: 'Periodos/List', component: PeriodosListComponent },
       { path: 'Periodos/new', component: PeriodosFormComponent },
       { path: 'Periodos/edit/:id', component: PeriodosFormComponent },
+      //Estudiantes
+      { path: 'Estudiantes/List', component: EstudiantesListComponent },
+      { path: 'Estudiantes/new', component: EstudiantesFormComponent },
+      { path: 'Estudiantes/edit/:id', component: EstudiantesFormComponent },
     ]
   },
   { path: 'Auth/Login', component: LogInComponent },

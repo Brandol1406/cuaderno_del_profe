@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MateriaModel } from 'src/app/models/materia.model';
 import { ApiService } from 'src/app/services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-materias-form',
@@ -33,20 +34,22 @@ export class MateriasFormComponent implements OnInit {
   }
 
   async onSubmit(e: Event) {
-    let toSend = { ...this.model };
-    try {
-      if (this.isEdit) {
-        let result = await this.apiService.api.put(`${this.apiUrl}/${this.id}`, toSend);
-      } else {
-        let result = await this.apiService.api.post(`${this.apiUrl}`, toSend);
+      let toSend = { ...this.model };
+      console.log(toSend)
+      try {
+        let result;
+        if (this.isEdit) {
+          result = await this.apiService.api.put(`${this.apiUrl}/${this.id}`, toSend);
+        } else {
+          result = await this.apiService.api.post(`${this.apiUrl}`, toSend);
+        }
+        Swal.fire("Guardado", result.data.message, "success");
+        this.router.navigate(['/Periodos/List']);
       }
-
-      this.router.navigate(['/Materias/List']);
+      catch (e) {
+        this.errors = { ...e.response.data.errors};
+        Swal.fire("Aviso", e.response.data.message, "warning");
+        console.log(this.errors);
+      }
     }
-    catch (e) {
-      
-      this.errors = { ...e.response.data.errors};
-      console.log(this.errors);
-    }
-  }
 }

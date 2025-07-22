@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LayoutComponent } from './layout/layout.component';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { LogInComponent } from './pages/Auth/login-form.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
@@ -17,6 +18,7 @@ import { PeriodosListComponent } from './pages/periodos/periodos-list.component'
 @NgModule({
   declarations: [
     AppComponent, 
+    LayoutComponent,
     InicioComponent,
     LogInComponent,
     ItemListComponent, 

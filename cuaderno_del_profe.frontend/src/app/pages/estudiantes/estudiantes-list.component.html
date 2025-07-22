@@ -1,7 +1,7 @@
-<h2>Listado peridos</h2>
+<h2>Listado estudiantes</h2>
 <a routerLink="/Estudiantes/new"
   class="btn btn-sm btn-primary mb-2"
-  >Agregar nuevo
+  ><i class="bi bi-plus-circle"></i> Agregar nuevo
 </a>
 
 <table class="table table-bordered table-sm table-striped">
@@ -25,8 +25,8 @@
       <td>{{item.nombres}}</td>
       <td>{{item.apellidos}}</td>
       <td>
-        <a [routerLink]="['/Estudiantes/edit', item.idEstudiante]" class="btn btn-sm btn-primary">Editar</a>
-        <button (click)="deleteItem(item.idEstudiante)" class="btn btn-sm btn-danger ms-2">Eliminar</button>
+        <a [routerLink]="['/Estudiantes/edit', item.idEstudiante]" class="btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i> Editar</a>
+        <button (click)="deleteItem(item.idEstudiante)" class="btn btn-sm btn-danger ms-2"><i class="bi bi-trash"></i> Eliminar</button>
       </td>
     </tr>
   </tbody>

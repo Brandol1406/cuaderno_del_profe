@@ -1,72 +1,175 @@
-<h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
 <form (ngSubmit)="onSubmit($event)" #form="ngForm">
-  <div class="row">
-    <div class="col-12 form-group">
-      <label>Nombres:</label><br />
-      <input [(ngModel)]="model.nombres" name="Nombres" class="form-control form-control-sm" required />
-      <small *ngIf="errors['Nombres']" class="text-danger">{{
-        errors["Nombres"]
-        }}</small>
+  <div class="d-flex justify-content-between align-items-center p-2">
+    <div>
+      <h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
     </div>
-    <div class="col-12 form-group">
-      <label>Apellidos:</label><br />
-      <input [(ngModel)]="model.apellidos" name="Apellidos" class="form-control form-control-sm" required />
-      <small *ngIf="errors['Apellidos']" class="text-danger">{{
-        errors["Apellidos"]
-        }}</small>
-    </div>
-    <div class="col-12 form-group">
-      <label>Sexo:</label><br />
-      <select [(ngModel)]="model.sexo" name="Sexo" class="form-control form-control-sm" required>
-        <option [ngValue]="null">Seleccione</option>
-        <option value="M">Masculino</option>
-        <option value="F">Femenino</option>
-      </select>
-      <small *ngIf="errors['Sexo']" class="text-danger">{{
-        errors["Sexo"]
-        }}</small>
-    </div>
-    <div class="col-12 form-group">
-      <label>Fecha Nacimiento:</label><br />
-      <input [(ngModel)]="model.fechaNacimiento" name="FechaNacimiento" type="date" class="form-control form-control-sm"
-         />
-      <small *ngIf="errors['FechaNacimiento']" class="text-danger">{{
-        errors["FechaNacimiento"]
-        }}</small>
-    </div>
-     <div class="col-12 form-group">
-      <label>Telefono1:</label><br />
-      <input [(ngModel)]="model.telefono1" name="Telefono1" class="form-control form-control-sm"  />
-      <small *ngIf="errors['Telefono1']" class="text-danger">{{
-        errors["Telefono1"]
-        }}</small>
-    </div>
-     <div class="col-12 form-group">
-      <label>Telefono1:</label><br />
-      <input [(ngModel)]="model.telefono2" name="Telefono2" class="form-control form-control-sm"  />
-      <small *ngIf="errors['Telefono2']" class="text-danger">{{
-        errors["Telefono2"]
-        }}</small>
-    </div>
-     <div class="col-12 form-group">
-      <label>Direccion:</label><br />
-      <textarea [(ngModel)]="model.direccion" name="Direccion" class="form-control form-control-sm" rows="3">
-      </textarea>
-      <small *ngIf="errors['Direccion']" class="text-danger">{{
-        errors["Direccion"]
-        }}</small>
-    </div>
-     <div class="col-12 form-group">
-      <label>E-Mail:</label><br />
-      <input [(ngModel)]="model.email" name="Email" class="form-control form-control-sm" />
-      <small *ngIf="errors['Email']" class="text-danger">{{
-        errors["Email"]
-        }}</small>
-    </div>
-    <div class="col-12 form-group mt-2">
-      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid">{{ isEdit ? 'Actualizar' :
+    <div>
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid"><i class="bi bi-floppy"></i> {{
+        isEdit ? 'Actualizar' :
         'Crear' }}</button>
-      <a routerLink="/Estudiantes/List" class="btn btn-sm btn-secondary ms-2">Volver</a>
+      <a routerLink="/Estudiantes/List" class="btn btn-sm btn-secondary ms-2"><i class="bi bi-arrow-return-left"></i>
+        Volver</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-4 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          Datos generales
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 form-group">
+              <label>Nombres:</label><br />
+              <input [(ngModel)]="model.nombres" name="Nombres" class="form-control form-control-sm" required />
+              <small *ngIf="errors['Nombres']" class="text-danger">{{
+                errors["Nombres"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Apellidos:</label><br />
+              <input [(ngModel)]="model.apellidos" name="Apellidos" class="form-control form-control-sm" required />
+              <small *ngIf="errors['Apellidos']" class="text-danger">{{
+                errors["Apellidos"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Sexo:</label><br />
+              <select [(ngModel)]="model.sexo" name="Sexo" class="form-control form-control-sm" required>
+                <option [ngValue]="null">Seleccione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+              <small *ngIf="errors['Sexo']" class="text-danger">{{
+                errors["Sexo"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Fecha Nacimiento:</label><br />
+              <input [(ngModel)]="model.fechaNacimiento" name="FechaNacimiento" type="date"
+                class="form-control form-control-sm" />
+              <small *ngIf="errors['FechaNacimiento']" class="text-danger">{{
+                errors["FechaNacimiento"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Telefono1:</label><br />
+              <input [(ngModel)]="model.telefono1" name="Telefono1" class="form-control form-control-sm" />
+              <small *ngIf="errors['Telefono1']" class="text-danger">{{
+                errors["Telefono1"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Telefono1:</label><br />
+              <input [(ngModel)]="model.telefono2" name="Telefono2" class="form-control form-control-sm" />
+              <small *ngIf="errors['Telefono2']" class="text-danger">{{
+                errors["Telefono2"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Direccion:</label><br />
+              <textarea [(ngModel)]="model.direccion" name="Direccion" class="form-control form-control-sm" rows="3">
+              </textarea>
+              <small *ngIf="errors['Direccion']" class="text-danger">{{
+                errors["Direccion"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>E-Mail:</label><br />
+              <input [(ngModel)]="model.email" name="Email" class="form-control form-control-sm" />
+              <small *ngIf="errors['Email']" class="text-danger">{{
+                errors["Email"]
+                }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          Inscripciones
+        </div>
+        <div class="card-body">
+          <button class="btn btn-sm btn-primary mb-2" type="button" (click)="abrirModal()">
+            <i class="bi bi-plus-circle"></i> Agregar
+          </button>
+          <table class="table table-bordered table-sm">
+            <colgroup>
+              <col width="50%" />
+              <col width="50%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <td>Periodo</td>
+                <td>Materia</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngRepeat="item of model.inscripciones">
+                <td>
+                  {{item.periodo}}
+                </td>
+                <td>
+                  {{item.materia}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </form>
+
+<form (ngSubmit)="addInscripcion($event)" #formInsc="ngForm">
+  <!-- Modal -->
+  <div class="modal" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header p-2">
+          <h5 class="modal-title" id="myModalLabel">Agregar inscripción</h5>
+          <button type="button" class="btn-close" (click)="cerrarModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p2">
+
+          <div class="row">
+            <div class="col-12 form-group">
+              <label>Periodo:</label><br />
+              <select [(ngModel)]="inscripcionModel.idPeriodo" name="idPeriodo" class="form-control form-control-sm"
+                required>
+                <option [ngValue]="null">Seleccione</option>
+                <option [ngValue]="item.idPeriodo" *ngFor="let item of periodos">{{item.nombre}}</option>
+              </select>
+            </div>
+            <div class="col-12 form-group">
+              <label>Materia:</label><br />
+              <select [(ngModel)]="inscripcionModel.idMateria" name="idMateria" class="form-control form-control-sm"
+                required>
+                <option [ngValue]="null">Seleccione</option>
+                <option [ngValue]="item.idMateria" *ngFor="let item of materias">{{item.nombre}}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer p-2">
+          <button type="button" class="btn btn-secondary btn-sm" (click)="cerrarModal()">Cerrar</button>
+          <button type="submit" class="btn btn-primary btn-sm" [disabled]="!formInsc.form.valid"><i
+              class="bi bi-plus-circle"></i> Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<style>
+  .modal-backdrop {
+    z-index: 1040 !important;
+  }
+
+  .modal {
+    z-index: 1050 !important;
+  }
+</style>

@@ -4,25 +4,30 @@
     </div>
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/Materias/List">Asistencia</a>
+            <a class="nav-link" aria-current="page" routerLink="/Asistencia/List" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: false }">Asistencia</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/Materias/List">Calificaciones</a>
+            <a class="nav-link" aria-current="page" routerLink="/Calificaciones/List" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: false }">Calificaciones</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/Estudiantes/List">Estudiantes</a>
+            <a class="nav-link" aria-current="page" routerLink="/Estudiantes/List" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: false }">Estudiantes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/Materias/List">Materias</a>
+            <a class="nav-link" aria-current="page" routerLink="/Materias/List" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: false }">Materias</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/Periodos/List">Periodos</a>
+            <a class="nav-link" aria-current="page" routerLink="/Periodos/List" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: false }">Periodos</a>
         </li>
     </ul>
     <div class="ms-auto dropdown">
         <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton"
             data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle"></i> Usuario
+            <i class="bi bi-person-circle"></i> {{userName}}
         </button>
         <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn"
             aria-labelledby="dropdownMenuButton">
@@ -32,6 +37,13 @@
     </div>
 </nav>
 
-<div class="container mt-4 animate__animated animate__fadeIn">
-    <router-outlet></router-outlet>
+<div class="container mt-4">
+    <div class="card" *ngIf="router.url !== '/'">
+        <div class="card-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <div *ngIf="router.url == '/'">
+        <h1 class="text-primary">Bienvenido al cuaderno del profe</h1>
+    </div>
 </div>

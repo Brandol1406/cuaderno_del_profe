@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
+
+  userName: string = "admin";
+
+  ngOnInit(){
+    console.log(this.router)
+  }
 
   logout() {
     localStorage.removeItem('token'); 

@@ -2,3 +2,15 @@ body {
   font-family: Arial, sans-serif;
   
 }
+
+.mi-clase-activa {
+  color: white;
+}
+
+.modal-backdrop {
+  z-index: 1040 !important;
+}
+
+.modal {
+  z-index: 1050 !important;
+}

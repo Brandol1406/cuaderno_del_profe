@@ -23,8 +23,8 @@
         }}</small>
     </div>
     <div class="col-12 form-group mt-2">
-      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid">{{ isEdit ? 'Actualizar' : 'Crear' }}</button>
-      <a routerLink="/Periodos/List" class="btn btn-sm btn-secondary ms-2">Volver</a>
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid"><i class="bi bi-floppy"></i> {{ isEdit ? 'Actualizar' : 'Crear' }}</button>
+      <a routerLink="/Periodos/List" class="btn btn-sm btn-secondary ms-2"><i class="bi bi-arrow-return-left"></i> Volver</a>
     </div>
   </div>
 </form>

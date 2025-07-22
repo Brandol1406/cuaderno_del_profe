@@ -1,3 +1,5 @@
+import { InscripcionModel } from "./InscripcionModel";
+
 export interface EstudianteModel {
     idEstudiante: number;
     nombres: string;
@@ -9,5 +11,5 @@ export interface EstudianteModel {
     telefono2: string;
     email: string;
     fregistro: Date;
-    inscripciones: Array<any>;
+    inscripciones: Array<InscripcionModel>;
 }

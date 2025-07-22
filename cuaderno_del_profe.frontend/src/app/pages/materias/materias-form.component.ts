@@ -44,7 +44,7 @@ export class MateriasFormComponent implements OnInit {
           result = await this.apiService.api.post(`${this.apiUrl}`, toSend);
         }
         Swal.fire("Guardado", result.data.message, "success");
-        this.router.navigate(['/Periodos/List']);
+        this.router.navigate(['/Materias/List']);
       }
       catch (e) {
         this.errors = { ...e.response.data.errors};

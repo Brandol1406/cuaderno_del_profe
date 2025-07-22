@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,7 +33,8 @@ import { PeriodosListComponent } from './pages/periodos/periodos-list.component'
     BrowserModule, 
     FormsModule, 
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

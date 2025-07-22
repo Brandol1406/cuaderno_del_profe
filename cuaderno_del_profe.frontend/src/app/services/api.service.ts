@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios, { AxiosInstance } from 'axios';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -35,10 +36,23 @@ export class ApiService {
             console.log(
               'Sesión expirada. Por favor, inicia sesión nuevamente.'
             );
+            Swal.fire({
+              icon: "warning",
+              title: "Aviso!",
+              text: "Sesión expirada. Por favor, inicia sesión nuevamente."
+            });
+
+
             localStorage.removeItem('token');
-            this.router.navigate(['Auth/Login']);
+            this.router.navigate(['/Auth/Login']);
           }
           else if (status === 403) {
+            Swal.fire({
+              icon: "warning",
+              title: "Aviso!",
+              text: 'No tienes permisos para realizar esta acción'
+            });
+
             this.router.navigate(['/']);
             console.error('No tienes permisos para realizar esta acción');
           }
@@ -47,6 +61,11 @@ export class ApiService {
           }
         } else {
           console.error('Error de red', error.message);
+          Swal.fire({
+              icon: "error",
+              title: "Error!",
+              text: error.message
+            });
         }
         return Promise.reject(error);
       }

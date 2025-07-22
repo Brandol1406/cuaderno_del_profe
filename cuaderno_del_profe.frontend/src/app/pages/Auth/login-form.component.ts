@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginModel } from 'src/app/models/login.model';
 import { ApiService } from '../../services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio',
@@ -33,6 +34,7 @@ export class LogInComponent implements OnInit {
         const { data, token } = response.data;
         localStorage.setItem('token', token);
         
+        Swal.fire("Exito!", "Inicio de sesión exitoso")
         this.router.navigate(['/']);
       } else {
         alert(response.data.message);

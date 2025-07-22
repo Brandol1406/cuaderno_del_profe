@@ -9,6 +9,6 @@ export class LayoutComponent {
   constructor(private router: Router) {}
 
   logout() {
-    localStorage.removeItem('token'); // O como manejes tu sesión
+    localStorage.removeItem('token'); 
   }
 }

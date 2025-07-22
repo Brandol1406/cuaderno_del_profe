@@ -7,4 +7,6 @@ export interface InscripcionModel {
   materia?: string;
   idPeriodo?: number;
   periodo?: string;
+  fInicioPeriodo?: Date;
+  fFinPeriodo?: Date;
 }

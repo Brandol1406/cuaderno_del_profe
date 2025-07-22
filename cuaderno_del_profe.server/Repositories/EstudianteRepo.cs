@@ -45,7 +45,7 @@ namespace cuaderno_del_profe.server.Repositories
         {
             var found = base.GetFirst(filter);
 
-            if (found != null) found.Inscripciones = InscripcionRepo.Get(x => x.IdEstudiante == found.IdEstudiante).ToList();
+            if (found != null) found.Inscripciones = InscripcionRepo.Get(x => x.IdEstudiante == found.IdEstudiante).OrderBy(x => x.FInicioPeriodo).ToList();
 
             return found;
         }

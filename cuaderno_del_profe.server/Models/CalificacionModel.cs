@@ -25,7 +25,7 @@ namespace cuaderno_del_profe.server.Models
         public int Calificacion1 { get; set; }
 
         [Column("FRegistro", TypeName = "datetime")]
-        public DateTime Fregistro { get; set; }
+        public DateTime? Fregistro { get; set; }
 
         [Column("FEvaluacion", TypeName = "datetime")]
         public DateTime Fevaluacion { get; set; }

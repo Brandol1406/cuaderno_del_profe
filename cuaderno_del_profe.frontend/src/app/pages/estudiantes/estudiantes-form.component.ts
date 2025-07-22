@@ -7,6 +7,7 @@ import { Modal } from 'bootstrap'; // Import Bootstrap's Modal
 import { MateriaModel } from 'src/app/models/materia.model';
 import { PeriodoModel } from 'src/app/models/periodo.model';
 import { InscripcionModel } from 'src/app/models/InscripcionModel';
+import arraysUtils from 'arrays-utils';
 
 @Component({
   selector: 'app-estudiantes-form',
@@ -28,10 +29,11 @@ export class EstudiantesFormComponent implements OnInit, AfterViewInit {
   };
 
   inscripcionModel: InscripcionModel = { idInscripcion: 0, idEstudiante: 0, idMateria: null, idPeriodo: null };;
+  inscripcionError: string = null;
 
   myModal: Modal | undefined;
   materias: Array<MateriaModel>;
-  periodos: Array<PeriodoModel>
+  periodos: Array<PeriodoModel>;
 
   isEdit = false;
   errors: object = {};
@@ -88,19 +90,57 @@ export class EstudiantesFormComponent implements OnInit, AfterViewInit {
   }
 
   initInscripcionModel(){
-    this.inscripcionModel = { idInscripcion: null, idEstudiante: null, idMateria: null, idPeriodo: null };
+    this.inscripcionModel = { idInscripcion: 0, idEstudiante: 0, idMateria: null, idPeriodo: null };
   }
 
   addInscripcion(e: Event){
     e.preventDefault();
+
+    if(this.existInscripcion()) {
+      this.inscripcionError = "Ya existe esta inscripción";
+      return;
+    }
+
     let periodoFound = this.periodos.find(x => x.idPeriodo == this.inscripcionModel.idPeriodo);
     let materiaFound = this.materias.find(x => x.idMateria == this.inscripcionModel.idMateria);
 
     this.inscripcionModel.periodo = periodoFound.nombre;
     this.inscripcionModel.materia = materiaFound.nombre;
+    this.inscripcionModel.fInicioPeriodo = periodoFound.finicio;
+    this.inscripcionModel.fFinPeriodo = periodoFound.ffin;
+
     this.model.inscripciones.push({...this.inscripcionModel});
     this.initInscripcionModel();
     this.cerrarModal();
+    this.inscripcionError = null;
+  }
+
+  deleteItem(item: InscripcionModel): void{
+    Swal.fire({
+            title: "¿Seguro desea eliminar esta inscripción?",
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar',
+            confirmButtonText: `
+            <i class="bi bi-trash"></i> Eliminar`,
+            confirmButtonColor: 'red',
+          }).then(async (result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              this.model.inscripciones = arraysUtils.remove(this.model.inscripciones, item);
+            }
+    });
+  }
+
+  existInscripcion(){
+    let found = this.model
+      .inscripciones
+      .find(x => x.idPeriodo == this.inscripcionModel.idPeriodo && x.idMateria == this.inscripcionModel.idMateria);
+
+    return found != null;
+  }
+
+  dateSortedInscripciones() : InscripcionModel[] {
+    return arraysUtils.orderBy(this.model.inscripciones, 'fInicioPeriodo');
   }
 
   ngAfterViewInit() {

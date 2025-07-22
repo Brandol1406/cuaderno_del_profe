@@ -97,22 +97,27 @@
           </button>
           <table class="table table-bordered table-sm">
             <colgroup>
-              <col width="50%" />
-              <col width="50%" />
+              <col width="45%" />
+              <col width="45%" />
+              <col width="10%">
             </colgroup>
             <thead>
               <tr>
-                <td>Periodo</td>
-                <td>Materia</td>
+                <th>Periodo</th>
+                <th>Materia</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngRepeat="item of model.inscripciones">
+              <tr *ngFor="let item of dateSortedInscripciones()">
                 <td>
                   {{item.periodo}}
                 </td>
                 <td>
                   {{item.materia}}
+                </td>
+                <td>
+                  <button type="button" (click)="deleteItem(item)" class="btn btn-sm btn-danger ms-2"><i class="bi bi-trash"></i></button>
                 </td>
               </tr>
             </tbody>
@@ -152,7 +157,9 @@
               </select>
             </div>
           </div>
-
+          <div class="alert alert-warning mt-2" *ngIf="inscripcionError != null">
+            {{inscripcionError}}
+          </div>
         </div>
         <div class="modal-footer p-2">
           <button type="button" class="btn btn-secondary btn-sm" (click)="cerrarModal()">Cerrar</button>
@@ -163,13 +170,3 @@
     </div>
   </div>
 </form>
-
-<style>
-  .modal-backdrop {
-    z-index: 1040 !important;
-  }
-
-  .modal {
-    z-index: 1050 !important;
-  }
-</style>

@@ -11,7 +11,7 @@ namespace cuaderno_del_profe.server.Repositories
             new ObjectsMapper<CalificacionModel, Calificacion>(m => new Calificacion() { 
                 IdCalificacion = m.IdCalificacion,
                 Fevaluacion = m.Fevaluacion,
-                Fregistro = m.Fregistro,
+                Fregistro = m.Fregistro ?? DateTime.Now,
                 IdEstudiante = m.IdEstudiante,
                 IdMateria = m.IdMateria,
                 IdPeriodo = m.IdPeriodo,

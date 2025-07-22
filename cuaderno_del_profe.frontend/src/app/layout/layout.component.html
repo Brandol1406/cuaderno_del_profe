@@ -29,7 +29,7 @@
             data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle"></i> {{userName}}
         </button>
-        <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn"
+        <ul class="dropdown-menu dropdown-menu-end"
             aria-labelledby="dropdownMenuButton">
             <li><a class="dropdown-item" routerLink="/cambiar-clave">Cambiar contraseña</a></li>
             <li><a class="dropdown-item text-danger" routerLink="/Auth/Login" (click)="logout()">Cerrar sesión</a></li>
@@ -43,7 +43,7 @@
             <router-outlet></router-outlet>
         </div>
     </div>
-    <div *ngIf="router.url == '/'">
+    <div *ngIf="router.url == '/'" class="text-center mt-4">
         <h1 class="text-primary">Bienvenido al cuaderno del profe</h1>
     </div>
 </div>

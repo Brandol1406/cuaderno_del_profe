@@ -28,6 +28,8 @@ namespace cuaderno_del_profe.server.Repositories
                                 Materia = ma.Nombre,
                                 Estudiante = $"{e.Nombres} {e.Apellidos}",
                                 Matricula = e.Matricula,
+                                FInicioPeriodo = p.Finicio,
+                                FFinPeriodo = p.Ffin,
                             }
         )
         {

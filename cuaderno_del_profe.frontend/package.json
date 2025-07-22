@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "dev": "ng serve --proxy-config proxy.conf.json",
+    "dev:launch": "node launch.js && ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint"
@@ -21,6 +22,7 @@
     "@angular/router": "^17.0.0",
     "@sweetalert2/ngx-sweetalert2": "^13.0.0",
     "animate.css": "^4.1.1",
+    "arrays-utils": "^1.0.0",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.13.1",

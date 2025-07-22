@@ -26,4 +26,6 @@ public partial class InscripcionModel
     [Column("idPeriodo")]
     public int IdPeriodo { get; set; }
     public string? Periodo { get; set; }
+    public DateOnly? FInicioPeriodo { get; set; }
+    public DateOnly? FFinPeriodo { get; set; }
 }

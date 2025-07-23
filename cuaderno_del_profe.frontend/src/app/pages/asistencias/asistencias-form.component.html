@@ -1,0 +1,95 @@
+<form (ngSubmit)="onSubmit($event)" #form="ngForm">
+  <div class="d-flex justify-content-between align-items-center p-2 sticky-top bg-light mb-2 border rounded">
+    <div>
+      <h2>{{ isEdit ? 'Editar' : 'Agregar' }}</h2>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!form.form.valid"><i class="bi bi-floppy"></i> {{
+        isEdit ? 'Actualizar' :
+        'Crear' }}</button>
+      <a routerLink="/Asistencias/List" class="btn btn-sm btn-secondary ms-2"><i class="bi bi-arrow-return-left"></i>
+        Volver</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-4 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          Datos generales
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 form-group">
+              <label>Periodo:</label><br />
+              <select [(ngModel)]="model.idPeriodo" [disabled]="isEdit" (change)="onSeleccionPeriodo($event)" name="idPeriodo" class="form-control form-control-sm"
+                required>
+                <option [ngValue]="null">Seleccione</option>
+                <option [ngValue]="item.idPeriodo" *ngFor="let item of periodos">{{item.nombre}} ({{item.finicio | date:'dd/MM/yyyy'}} - {{item.ffin | date:'dd/MM/yyyy'}})</option>
+              </select>
+              <small *ngIf="errors['idPeriodo']" class="text-danger">{{
+                errors["idPeriodo"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Materia:</label><br />
+              <select [(ngModel)]="model.idMateria" [disabled]="isEdit" (change)="onSeleccionMateria($event)" name="idMateria" class="form-control form-control-sm"
+                required>
+                <option [ngValue]="null">Seleccione</option>
+                <option [ngValue]="item.idMateria" *ngFor="let item of materias">{{item.nombre}}</option>
+              </select>
+              <small *ngIf="errors['idMateria']" class="text-danger">{{
+                errors["idMateria"]
+                }}</small>
+            </div>
+            <div class="col-12 form-group">
+              <label>Fecha:</label><br />
+              <input [(ngModel)]="model.fecha" [readonly]="isEdit" name="fecha" type="date"
+                class="form-control form-control-sm" />
+              <small *ngIf="errors['Fecha']" class="text-danger">{{
+                errors["Fecha"]
+                }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-8 col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          Estudiantes
+        </div>
+        <label class="text-danger ms-2" *ngIf="errors['asistenciasEstudiantes'] != null"> {{errors["asistenciasEstudiantes"]}}</label>
+        <div class="card-body">
+          <table class="table table-bordered table-sm">
+            <colgroup>
+              <col width="45%" />
+              <col width="45%" />
+              <col width="10%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Matrícula</th>
+                <th>Estudiante</th>
+                <th>Presente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of model.asistenciasEstudiantes">
+                <td>
+                  {{item.matricula}}
+                </td>
+                <td>
+                  {{item.estudiante}}
+                </td>
+                <td>
+                  <input [(ngModel)]="item.presente" type="checkbox">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

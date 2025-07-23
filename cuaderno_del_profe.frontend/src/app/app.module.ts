@@ -19,6 +19,8 @@ import { EstudiantesListComponent } from './pages/estudiantes/estudiantes-list.c
 import { EstudiantesFormComponent } from './pages/estudiantes/estudiantes-form.component';
 import { CalificacionesListComponent } from './pages/calificaciones/calificaciones-list.component';
 import { CalificacionesFormComponent } from './pages/calificaciones/calificaciones-form.component';
+import { AsistenciasListComponent } from './pages/asistencias/asistencias-list.component';
+import { AsistenciasFormComponent } from './pages/asistencias/asistencias-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CalificacionesFormComponent } from './pages/calificaciones/calificacion
     EstudiantesListComponent,
     EstudiantesFormComponent,
     CalificacionesListComponent,
-    CalificacionesFormComponent
+    CalificacionesFormComponent,
+    AsistenciasListComponent,
+    AsistenciasFormComponent,
   ],
   imports: [
     BrowserModule, 

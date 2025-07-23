@@ -70,7 +70,7 @@ namespace cuaderno_del_profe.server.Controllers
 
                 if (!isAsistenciaUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado este registro de asistencia"));
 
-                if (!HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
+                if (HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
 
                 repo.Edit(model);
             }
@@ -104,7 +104,7 @@ namespace cuaderno_del_profe.server.Controllers
 
                 if (!isAsistenciaUnique(model)) return BadRequest(new OperationResult(false, "Ya se ha realizado este registro de asistencia"));
 
-                if (!HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
+                if (HayDuplicidades(model)) return BadRequest(new OperationResult(nameof(model.asistenciasEstudiantes), "Existen duplicidades, favor revisar"));
 
                 created = repo.Add(model);
             }

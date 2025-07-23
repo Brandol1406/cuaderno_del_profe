@@ -18,6 +18,8 @@ import { EstudiantesListComponent } from './pages/estudiantes/estudiantes-list.c
 import { EstudiantesFormComponent } from './pages/estudiantes/estudiantes-form.component';
 import { CalificacionesListComponent } from './pages/calificaciones/calificaciones-list.component';
 import { CalificacionesFormComponent } from './pages/calificaciones/calificaciones-form.component';
+import { AsistenciasListComponent } from './pages/asistencias/asistencias-list.component';
+import { AsistenciasFormComponent } from './pages/asistencias/asistencias-form.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,10 @@ const routes: Routes = [
       { path: 'Calificaciones/List', component: CalificacionesListComponent },
       { path: 'Calificaciones/new', component: CalificacionesFormComponent },
       { path: 'Calificaciones/edit/:id', component: CalificacionesFormComponent },
+      //Asistencias
+      { path: 'Asistencias/List', component: AsistenciasListComponent },
+      { path: 'Asistencias/new', component: AsistenciasFormComponent },
+      { path: 'Asistencias/edit/:id', component: AsistenciasFormComponent },
     ]
   },
   { path: 'Auth/Login', component: LogInComponent },

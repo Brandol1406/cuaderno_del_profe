@@ -31,11 +31,11 @@ export class EstudiantesListComponent implements OnInit {
     const lower = this.searchText.toLowerCase();
 
     return this.items.filter(item =>
-      // Object.keys(item).some(key => item[key].toString().toLowerCase().includes(lower))
+      Object.keys(item).some(key => (item[key] ?? '').toString().toLowerCase().includes(lower))
 
-      item.matricula?.toLowerCase().includes(lower) ||
-      item.nombres?.toLowerCase().includes(lower) ||
-      item.apellidos?.toLowerCase().includes(lower)
+      //item.matricula?.toLowerCase().includes(lower) ||
+      //item.nombres?.toLowerCase().includes(lower) ||
+      //item.apellidos?.toLowerCase().includes(lower)
     );
   }
 

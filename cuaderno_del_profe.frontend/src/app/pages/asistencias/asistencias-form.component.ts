@@ -50,6 +50,7 @@ export class AsistenciasFormComponent implements OnInit {
     }
 
     await this.loadRelationObjects();
+    this.setListaInscritos(this.model.idPeriodo, this.model.idMateria);
   }
 
   async loadRelationObjects() {
@@ -77,7 +78,7 @@ export class AsistenciasFormComponent implements OnInit {
       .map(x  => (
         {
           idEstudiante: x.idEstudiante,
-          presente: false,
+          presente: this.model.asistenciasEstudiantes.find(y => y.idEstudiante == x.idEstudiante)?.presente ?? false,
           estudiante: x.estudiante,
           matricula: x.matricula
         }

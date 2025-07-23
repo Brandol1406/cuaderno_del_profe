@@ -38,7 +38,7 @@
 </nav>
 
 <div class="container mt-4">
-    <div class="card" *ngIf="router.url !== '/'">
+    <div class="card responsive-card custom-shadow border rounded" *ngIf="router.url !== '/'">
         <div class="card-body">
             <router-outlet></router-outlet>
         </div>
@@ -47,3 +47,8 @@
         <h1 class="text-primary">Bienvenido al cuaderno del profe</h1>
     </div>
 </div>
+<footer class="footer-custom">
+  <div class="container">
+    <p class="mb-0">© 2025 Cuaderno del Profe. Todos los derechos reservados.</p>
+  </div>
+</footer>

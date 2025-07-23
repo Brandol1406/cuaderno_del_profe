@@ -16,6 +16,8 @@ import { PeriodosFormComponent } from './pages/periodos/periodos-form.component'
 //Estudiantes
 import { EstudiantesListComponent } from './pages/estudiantes/estudiantes-list.component';
 import { EstudiantesFormComponent } from './pages/estudiantes/estudiantes-form.component';
+import { CalificacionesListComponent } from './pages/calificaciones/calificaciones-list.component';
+import { CalificacionesFormComponent } from './pages/calificaciones/calificaciones-form.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,10 @@ const routes: Routes = [
       { path: 'Estudiantes/List', component: EstudiantesListComponent },
       { path: 'Estudiantes/new', component: EstudiantesFormComponent },
       { path: 'Estudiantes/edit/:id', component: EstudiantesFormComponent },
+      //Calificaciones
+      { path: 'Calificaciones/List', component: CalificacionesListComponent },
+      { path: 'Calificaciones/new', component: CalificacionesFormComponent },
+      { path: 'Calificaciones/edit/:id', component: CalificacionesFormComponent },
     ]
   },
   { path: 'Auth/Login', component: LogInComponent },

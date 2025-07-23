@@ -8,6 +8,6 @@ export interface CalificacionModel {
   idPeriodo: number;
   periodo?: string;
   calificacion1: number;
-  fregistro?: string;     // Usamos string porque en frontend las fechas suelen llegar como ISO strings
-  fevaluacion: string;
+  fregistro?: Date;   
+  fevaluacion: Date;
 }

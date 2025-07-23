@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-layout',
@@ -8,10 +9,20 @@ import { Router } from '@angular/router';
 export class LayoutComponent {
   constructor(public router: Router) {}
 
+  usrDDB: any;
   userName: string = "admin";
 
   ngOnInit(){
-    console.log(this.router)
+    
+  }
+
+  ngAfterViewInit() {
+    // Inicializa dropdown manualmente si es necesario
+    this.usrDDB = new bootstrap.Dropdown(document.getElementById("usrDropdownMenuButton"));
+  }
+
+  showUsrDDB(){
+    this.usrDDB.show();
   }
 
   logout() {

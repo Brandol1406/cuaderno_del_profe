@@ -2,6 +2,7 @@ import { InscripcionModel } from "./InscripcionModel";
 
 export interface EstudianteModel {
     idEstudiante: number;
+    matricula?:string;
     nombres: string;
     apellidos: string;
     sexo: string;

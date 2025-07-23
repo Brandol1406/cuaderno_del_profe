@@ -11,7 +11,9 @@ export class EstudiantesListComponent implements OnInit {
   items: EstudianteModel[] = [];
   private apiUrl = '/Estudiantes';
 
-  constructor(private apiService: ApiService) {}
+  searchText: string = '';
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
     this.loadItems();
@@ -23,28 +25,42 @@ export class EstudiantesListComponent implements OnInit {
     this.items = [...result.data];
   }
 
+  filteredItems() {
+    if (!this.searchText) return this.items;
+
+    const lower = this.searchText.toLowerCase();
+
+    return this.items.filter(item =>
+      // Object.keys(item).some(key => item[key].toString().toLowerCase().includes(lower))
+
+      item.matricula?.toLowerCase().includes(lower) ||
+      item.nombres?.toLowerCase().includes(lower) ||
+      item.apellidos?.toLowerCase().includes(lower)
+    );
+  }
+
   async deleteItem(id: number) {
-      Swal.fire({
-        title: "¿Seguro desea eliminar este registro?",
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonText: `
+    Swal.fire({
+      title: "¿Seguro desea eliminar este registro?",
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: `
         <i class="bi bi-trash"></i> Eliminar`,
-        confirmButtonColor: 'red',
-      }).then(async (result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          try {
-            let result = await this.apiService.api.delete(`${this.apiUrl}/${id}`);
-  
-            this.loadItems();
-            Swal.fire("Eliminado!", "Se ha eliminado con éxito", "success");
-          }
-          catch (e) {
-            console.log(e);
-            Swal.fire("Aviso", e.response.data.message, "warning");
-          }
+      confirmButtonColor: 'red',
+    }).then(async (result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        try {
+          let result = await this.apiService.api.delete(`${this.apiUrl}/${id}`);
+
+          this.loadItems();
+          Swal.fire("Eliminado!", "Se ha eliminado con éxito", "success");
         }
-      });
-    }
+        catch (e) {
+          console.log(e);
+          Swal.fire("Aviso", e.response.data.message, "warning");
+        }
+      }
+    });
+  }
 }

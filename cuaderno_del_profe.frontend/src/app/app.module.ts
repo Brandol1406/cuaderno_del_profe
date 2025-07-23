@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+//Pipes
+import { FilterTextPipe } from './pipes/filterText.pipe';
+
+//Componentes
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponent } from './layout/layout.component';
@@ -40,6 +44,7 @@ import { AsistenciasFormComponent } from './pages/asistencias/asistencias-form.c
     CalificacionesFormComponent,
     AsistenciasListComponent,
     AsistenciasFormComponent,
+    FilterTextPipe,
   ],
   imports: [
     BrowserModule, 

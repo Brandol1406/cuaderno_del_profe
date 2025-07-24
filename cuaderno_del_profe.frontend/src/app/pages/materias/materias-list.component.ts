@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class MateriasListComponent implements OnInit {
   items: MateriaModel[] = [];
   private apiUrl = '/Materia';
+  searchText: string;
 
   constructor(private apiService: ApiService) { }
 

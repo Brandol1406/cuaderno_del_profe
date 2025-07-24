@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class PeriodosListComponent implements OnInit {
   items: PeriodoModel[] = [];
   private apiUrl = '/Periodo';
+  searchText: string;
 
   constructor(private apiService: ApiService) {}
 

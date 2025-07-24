@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class CalificacionesListComponent implements OnInit {
   items: CalificacionModel[] = [];
   private apiUrl = '/Calificacion';
+  searchText: string = "";
 
   constructor(private apiService: ApiService) { }
 

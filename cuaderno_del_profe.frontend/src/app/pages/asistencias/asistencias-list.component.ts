@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class AsistenciasListComponent implements OnInit {
   items: AsistenciaModel[] = [];
   private apiUrl = '/Asistencia';
+  searchText: string;
 
   constructor(private apiService: ApiService) {}
 

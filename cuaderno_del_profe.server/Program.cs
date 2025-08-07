@@ -129,5 +129,7 @@ app.MapControllers();
 app.UseDefaultFiles(); // Esto hace que / muestre index.html autom�ticamente
 app.UseStaticFiles();
 
+app.MapFallbackToFile("/index.html");
+
 app.Run();
 

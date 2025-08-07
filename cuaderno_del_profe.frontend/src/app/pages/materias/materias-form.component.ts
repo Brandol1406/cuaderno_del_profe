@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MateriaModel } from 'src/app/models/materia.model';
+import { PeriodoModel } from 'src/app/models/periodo.model';
 import { ApiService } from 'src/app/services/api.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,9 @@ export class MateriasFormComponent implements OnInit {
   errors: object = {  };
   private apiUrl = '/Materia';
   private id = 0;
+
+  periodos: PeriodoModel[] = [];
+  selectPeriodo: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,11 +35,18 @@ export class MateriasFormComponent implements OnInit {
         this.isEdit = true;
       }
     }
+
+    this.loadRelationObjects();
+  }
+
+  async loadRelationObjects() {
+    let result = await this.apiService.api.get(`/periodo`);
+    this.periodos = result.data;
+    console.log(result)
   }
 
   async onSubmit(e: Event) {
       let toSend = { ...this.model };
-      console.log(toSend)
       try {
         let result;
         if (this.isEdit) {
